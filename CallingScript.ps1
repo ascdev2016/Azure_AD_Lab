@@ -1,6 +1,7 @@
-﻿break
+﻿<#
+break
 
-# Shout out to @brwilkinson for assistance with some of this.
+ Shout out to @brwilkinson for assistance with some of this.
 
 
 # Install the Azure Resource Manager modules from PowerShell Gallery
@@ -17,16 +18,16 @@ Import-AzureRM -Verbose
 # Import Azure Service Management module
 Import-Module Azure -Verbose
 
-# Authenticate to your Azure account
+# Authenticate to your Azure account #>
 Login-AzureRmAccount
 
 # Adjust the 'yournamehere' part of these three strings to
 # something unique for you. Leave the last two characters in each.
-$URI       = 'https://raw.githubusercontent.com/GoateePFE/AzureRM/master/active-directory-new-domain-with-data/azuredeploy.json'
-$Location  = 'east us'
-$rgname    = 'yournamehererg'
-$saname    = 'yournameheresa'     # Lowercase required
-$addnsName = 'yournameheread'     # Lowercase required
+$URI       = 'https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/azuredeploy.json'
+$Location  = 'West Europe'
+$rgname    = 'TestADController'
+$saname    = 'ascadtest'     # Lowercase required
+$addnsName = 'ascadtest'     # Lowercase required
 
 # Check that the public dns $addnsName is available
 if (Test-AzureRmDnsAvailability -DomainNameLabel $addnsName -Location $Location)
@@ -38,8 +39,8 @@ New-AzureRmResourceGroup -Name $rgname -Location $Location
 # Parameters for the template and configuration
 $MyParams = @{
     newStorageAccountName = $saname
-    location              = 'East US'
-    domainName            = 'alpineskihouse.com'
+    location              = 'West Europe'
+    domainName            = 'ascad.local'
     addnsName             = $addnsName
    }
 
@@ -48,7 +49,7 @@ $SplatParams = @{
     TemplateUri             = $URI 
     ResourceGroupName       = $rgname 
     TemplateParameterObject = $MyParams
-    Name                    = 'AlpineSkiHouseForest'
+    Name                    = 'ascad'
    }
 
 # This takes ~30 minutes
