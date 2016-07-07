@@ -18,7 +18,7 @@ svc_sp_suser,P@ssw0rd,SharePoint,SharePoint Super User Account,svc_sp_suser,svc_
 svc_sp_sreader,P@ssw0rd,SharePoint,SharePoint Super Reader Account,svc_sp_sreader,svc_sp_sreader,,svc_sp_sreader
 svc_sp_mysite,P@ssw0rd,SharePoint,SharePoint MySite Account,svc_sp_mysite,svc_sp_mysite,,svc_sp_mysite
 svc_sql_admin,P@ssw0rd,SQL,SQL Admin Account,svc_sql_admin,svc_sql_admin,,svc_sql_admin
-svc_sql_engine,P@ssw0rd,SQL,SQL Engine Account,svc_sql_engine,svc_sql_engine,,svc_sql_engine
+svc_sql_engine,P@ssw0rd,SQL,SQL Engine Account,svc_sql_engine,svc_sql_engine,,svc_sql_engine@ascdc.local
 '@
 
         RootOUs = 'SharePoint','SQL'
