@@ -1,4 +1,4 @@
-﻿#sadadsadsadsadas
+﻿
 configuration CreateADDomainWithData
 { 
    param 
@@ -128,7 +128,7 @@ configuration CreateADDomainWithData
                 Ensure = 'Present'
                 UserName = $User.UserName
                 JobTitle = $User.Title
-                Path = "OU=Users,OU=$($User.Dept),$DomainRoot"
+                Path = "OU=Users,OU=$($User.OU),$DomainRoot"
                 Enabled = $true
                 Password = New-Object -TypeName PSCredential -ArgumentList 'JustPassword', (ConvertTo-SecureString -String $User.Password -AsPlainText -Force)
                 DependsOn = $DependsOn_OU
@@ -158,7 +158,7 @@ configuration CreateADDomainWithData
                 GroupScope = 'Global'
                 Description = "Global group for $RootOU"
                 Category = 'Security'
-                Members = ($Users | Where-Object {$_.Dept -eq $RootOU}).UserName
+                Members = ($Users | Where-Object {$_.OU -eq $RootOU}).UserName
                 Path = "OU=Groups,OU=$RootOU,$DomainRoot"
                 Ensure = 'Present'
                 DependsOn = $DependsOn_User
