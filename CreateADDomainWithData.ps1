@@ -128,6 +128,8 @@ configuration CreateADDomainWithData
                 Ensure = 'Present'
                 UserName = $User.UserName
                 JobTitle = $User.Title
+				sn = $User.sn
+				DisplayName = $User.displayName
                 Path = "OU=Users,OU=$($User.OU),$DomainRoot"
                 Enabled = $true
                 Password = New-Object -TypeName PSCredential -ArgumentList 'JustPassword', (ConvertTo-SecureString -String $User.Password -AsPlainText -Force)
