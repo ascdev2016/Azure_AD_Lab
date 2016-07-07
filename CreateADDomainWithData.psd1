@@ -9,7 +9,7 @@
     NonNodeData = @{
 
         UserData = @'
-UserName,Password,Dept,Title
+UserName,Password,Department,sn
 svc_sp_farm,P@ssw0rd,SharePoint,SharePoint Farm Account
 svc_sp_search,P@ssw0rd,SharePoint,SharePoint Search Account
 svc_sp_crawl,P@ssw0rd,SharePoint,SharePoint Crawl Account
