@@ -25,9 +25,9 @@ Login-AzureRmAccount
 # something unique for you. Leave the last two characters in each.
 $URI       = 'https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/azuredeploy.json'
 $Location  = 'West Europe'
-$rgname    = 'TestADController'
-$saname    = 'ascadtest'     # Lowercase required
-$addnsName = 'ascadtest'     # Lowercase required
+$rgname    = 'zweiterADController'
+$saname    = 'ascadtestzwei'     # Lowercase required
+$addnsName = 'ascadtestzwei'     # Lowercase required
 
 # Check that the public dns $addnsName is available
 if (Test-AzureRmDnsAvailability -DomainNameLabel $addnsName -Location $Location)
