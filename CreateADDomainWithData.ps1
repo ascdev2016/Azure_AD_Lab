@@ -128,7 +128,7 @@ configuration CreateADDomainWithData
                 Ensure = 'Present'
                 UserName = $User.UserName
                 JobTitle = $User.Title
-				sn = $User.sn
+				Surname = $User.Surname
 				DisplayName = $User.displayName
                 Path = "OU=Users,OU=$($User.OU),$DomainRoot"
                 Enabled = $true
