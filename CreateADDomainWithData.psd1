@@ -10,17 +10,18 @@
 
         UserData = @'
 UserName,Password,Dept,Title
-Alice,P@ssw0rd,Accounting,Manager
-Bob,P@ssw0rd,IT,Manager
-Charlie,P@ssw0rd,Marketing,Manager
-Debbie,P@ssw0rd,Operations,Manager
-Eddie,P@ssw0rd,Accounting,Specialist
-Frieda,P@ssw0rd,IT,Specialist
-George,P@ssw0rd,Marketing,Specialist
-Harriet,P@ssw0rd,Operations,Specialist
+svc_sp_farm,P@ssw0rd,SharePoint,SharePoint Farm Account
+svc_sp_search,P@ssw0rd,SharePoint,SharePoint Search Account
+svc_sp_crawl,P@ssw0rd,SharePoint,SharePoint Crawl Account
+svc_sp_apppool,P@ssw0rd,SharePoint,SharePoint AppPool Account
+svc_sp_suser,P@ssw0rd,SharePoint,SharePoint Super User Account
+svc_sp_sreader,P@ssw0rd,SharePoint,SharePoint Super Reader Account
+svc_sp_mysite,P@ssw0rd,SharePoint,SharePoint MySite Account
+svc_sql_admin,P@ssw0rd,SQL,SQL Admin Account
+svc_sql_engine,P@ssw0rd,SQL,SQL Engine Account
 '@
 
-        RootOUs = 'Accounting','IT','Marketing','Operations'
+        RootOUs = 'SharePoint','SQL'
         ChildOUs = 'Users','Computers','Groups'
         TestObjCount = 5
 
