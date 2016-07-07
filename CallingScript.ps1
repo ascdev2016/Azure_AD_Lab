@@ -37,7 +37,7 @@ if (Test-AzureRmDnsAvailability -DomainNameLabel $addnsName -Location $Location)
 New-AzureRmResourceGroup -Name $rgname -Location $Location
 
 # Parameters for the template and configuration
-$MyParams = @{
+$MyParams.domainName = @{
     newStorageAccountName = $saname
     location              = 'West Europe'
     domainName            = 'ascad.local'

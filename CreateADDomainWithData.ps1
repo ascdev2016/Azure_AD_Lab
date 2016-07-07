@@ -132,7 +132,7 @@ configuration CreateADDomainWithData
 				DisplayName = $User.displayName
 				Description = $User.Description
 				GivenName = $User.firstName
-				UserPrincipalName = $User.UPN
+				UserPrincipalName = $User.UPN + "@" + $DomainName
                 Path = "OU=Users,OU=$($User.OU),$DomainRoot"
                 Enabled = $true
                 Password = New-Object -TypeName PSCredential -ArgumentList 'JustPassword', (ConvertTo-SecureString -String $User.Password -AsPlainText -Force)
