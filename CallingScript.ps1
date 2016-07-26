@@ -31,7 +31,10 @@ $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
 
 # Check that the public dns $addnsName is available
-if (Test-AzureRmDnsAvailability -DomainNameLabel $addnsName -Location $Location)
+if (Test-AzureRmDnsAvailability -DomainNameLabel $dcdnsName -Location $Location)
+{ 'Available' } else { 'Taken. addnsName must be globally unique.' }
+
+if (Test-AzureRmDnsAvailability -DomainNameLabel $sqldnsName -Location $Location)
 { 'Available' } else { 'Taken. addnsName must be globally unique.' }
 
 # Create the new resource group. Runs quickly.
