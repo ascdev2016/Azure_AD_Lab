@@ -213,11 +213,13 @@
       "type": "string",
       "metadata": {
         "description": "The DNS prefix for the public IP address used by the Load Balancer"
-      },
+      }      
+     },
       "sqldnsName": {
         "type": "string",
         "metadata": {
           "description": "The DNS prefix for the public IP address used by the Load Balancer"
+        }
       },
       "RDPPort": {
         "type": "int",
