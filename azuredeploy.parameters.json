@@ -23,7 +23,10 @@
     "domainName": {
       "value": "mydomain.local"
     },
-    "addnsName": {
+    "dcdnsName": {
+      "value": "GEN-UNIQUE"
+    },
+    "sqldnsName": {
       "value": "GEN-UNIQUE"
     },
     "assetLocation": {

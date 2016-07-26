@@ -27,7 +27,8 @@ $URI       = 'https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/a
 $Location  = 'West Europe'
 $rgname    = 'ASC_Lab'
 $saname    = 'asclabsa'     # Lowercase required
-$addnsName = 'asclabdc'     # Lowercase required
+$dcdnsName = 'asclabdc'     # Lowercase required
+$sqldnsname = 'asclabsql'   # Lowercase required
 
 # Check that the public dns $addnsName is available
 if (Test-AzureRmDnsAvailability -DomainNameLabel $addnsName -Location $Location)
