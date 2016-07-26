@@ -103,7 +103,7 @@
       "metadata": {
         "description": "The name of the public IP address used by the Load Balancer"
       },
-      "defaultValue": "SP-DC-PIP"
+      "defaultValue": "SP-SQL-PIP"
     },
     "publicIPAddressType": {
       "type": "string",
