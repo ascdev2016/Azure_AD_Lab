@@ -100,7 +100,7 @@
       "metadata": {
         "description": "The name of the VM created"
       },
-      "defaultValue": "adDC"
+      "defaultValue": "SP-DC"
     },
     "adminUsername": {
       "type": "string",
