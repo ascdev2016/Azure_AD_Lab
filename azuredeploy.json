@@ -283,7 +283,7 @@
       "properties": {
         "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('addnsName')]"
+          "domainNameLabel": "[parameters('dcdnsName')]"
         }
       }
     },
@@ -295,7 +295,7 @@
       "properties": {
         "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('addnsName')]"
+          "domainNameLabel": "[parameters('sqldnsName')]"
         }
       }
     },
