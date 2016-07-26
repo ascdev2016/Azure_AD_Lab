@@ -70,6 +70,13 @@
       },
       "defaultValue": "SP-DC-Nic"
     },
+    "SP-SQL-NicName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the NIC attached to the new VM"
+      },
+      "defaultValue": "SP-SQL-Nic"
+    },
     "SP-DC-NicIPAdress": {
       "type": "string",
       "metadata": {
@@ -77,7 +84,21 @@
       },
       "defaultValue": "10.0.0.4"
     },
+    "SP-SQL-NicIPAdress": {
+      "type": "string",
+      "metadata": {
+        "description": "The IP address of the new AD VM"
+      },
+      "defaultValue": "10.0.0.5"
+    },
     "SP-DC-PIP": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the public IP address used by the Load Balancer"
+      },
+      "defaultValue": "SP-DC-PIP"
+    },
+    "SP-SQL-PIP": {
       "type": "string",
       "metadata": {
         "description": "The name of the public IP address used by the Load Balancer"
@@ -168,6 +189,13 @@
       },
       "defaultValue": "SP-DC-AV-Set"
     },
+    "SP-SQL-AV-Set": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the availability set that the AD VM is created in"
+      },
+      "defaultValue": "SP-SQL-AV-Set"
+    },
     "domainName": {
       "type": "string",
       "metadata": {
@@ -193,21 +221,37 @@
         "description": "The location of resources such as templates and DSC modules that the script is dependent"
       },
       "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
+    },
+    "SP-SQL-VMName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the VM created"
+      },
+      "defaultValue": "SP-SQL"
     }
   },
   "variables": {
     "SP-DC-LBFE": "LBFE",
+    "SP-SQL-LBFE": "LBFE",
     "SP-DC-LBBE": "LBBE",
+    "SP-SQL-LBBE": "LBBE",
     "RDPNAT": "adRDP",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubnetName'))]",
     "SP-DC-NicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('SP-DC-NicName'))]",
+    "SP-SQL-NicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('SP-SQL-NicName'))]",
     "SP-DC-IPConfigID": "[concat(variables('SP-DC-NicId'),'/ipConfigurations/ipconfig1')]",
+    "SP-SQL-IPConfigID": "[concat(variables('SP-SQL-NicId'),'/ipConfigurations/ipconfig1')]",
     "SP-DC-LBName": "SP-DC-LoadBalancer",
+    "SP-SQL-LBName": "SP-SQL-LoadBalancer",
     "SP-DC-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-DC-LBName'))]",
+    "SP-SQL-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-SQL-LBName'))]",
     "SP-DC-FEConfigID": "[concat(variables('SP-DC-LBID'),'/frontendIPConfigurations/',variables('SP-DC-LBFE'))]",
+    "SP-SQL-FEConfigID": "[concat(variables('SP-SQL-LBID'),'/frontendIPConfigurations/',variables('SP-SQL-LBFE'))]",
     "SP-DC-RDPNATRuleID": "[concat(variables('SP-DC-LBID'),'/inboundNatRules/',variables('RDPNAT'))]",
+    "SP-SQL-RDPNATRuleID": "[concat(variables('SP-SQL-LBID'),'/inboundNatRules/',variables('RDPNAT'))]",
     "SP-DC-BEAddressPoolID": "[concat(variables('SP-DC-LBID'),'/backendAddressPools/',variables('SP-DC-LBBE'))]",
+    "SP-SQL-BEAddressPoolID": "[concat(variables('SP-SQL-LBID'),'/backendAddressPools/',variables('SP-SQL-LBBE'))]",
     "VM-DataDisk": "VMDataDisk",
     "VM-DataDiskSize": 5,
     "vnetTemplateUri": "[concat(parameters('assetLocation'),'vnet.json')]",
@@ -238,8 +282,26 @@
       }
     },
     {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('SP-SQL-PIP')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('addnsName')]"
+        }
+      }
+    },
+    {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('SP-DC-AV-Set')]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]"
+    },
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[parameters('SP-SQL-AV-Set')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]"
     },
@@ -312,6 +374,47 @@
         ]
       }
     },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "name": "[variables('SP-SQL-LBName')]",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses',parameters('SP-SQL-PIP'))]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "[variables('SP-SQL-LBFE')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('SP-SQL-PIP'))]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "[variables('SP-SQL-LBBE')]"
+          }
+        ],
+        "inboundNatRules": [
+          {
+            "name": "[variables('RDPNAT')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('SP-SQL-FEConfigID')]"
+              },
+              "protocol": "tcp",
+              "frontendPort": "[parameters('RDPPort')]",
+              "backendPort": 3389,
+              "enableFloatingIP": false
+            }
+          }
+        ]
+      }
+    },
+
     {
       "name": "[parameters('SP-DC-NicName')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -474,6 +577,100 @@
               "[parameters('SP-DC-NicIPAdress')]"
             ]
           }
+        }
+      }
+    },
+    {
+      "name": "[parameters('SP-SQL-NicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/VNet",
+        "[concat('Microsoft.Network/loadBalancers/',variables('SP-SQL-LBName'))]"
+      ],
+      "apiVersion": "2015-05-01-preview",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('SP-SQL-NicIPAdress')]",
+              "subnet": {
+                "id": "[variables('adSubnetRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[variables('SP-SQL-BEAddressPoolID')]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[variables('SP-SQL-RDPNATRuleID')]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('SP-SQL-VMName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts',parameters('newStorageAccountName'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces',parameters('SP-SQL-NicName'))]",
+        "[resourceId('Microsoft.Compute/availabilitySets', parameters('SP-SQL-AV-Set'))]",
+        "[resourceId('Microsoft.Network/loadBalancers',variables('SP-SQL-LBName'))]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('VMSize')]"
+        },
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('SP-SQL-AV-Set'))]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('SP-SQL-VMName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('imagePublisher')]",
+            "offer": "[parameters('imageOffer')]",
+            "sku": "[parameters('imageSKU')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/','osdisk.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          },
+          "dataDisks": [
+            {
+              "vhd": {
+                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/', variables('VM-DataDisk'),'-1.vhd')]"
+              },
+              "name": "[concat(parameters('SP-SQL-VMName'),'-data-disk1')]",
+              "caching": "None",
+              "createOption": "empty",
+              "diskSizeGB": "[variables('VM-DataDiskSize')]",
+              "lun": 0
+            }
+          ]
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('SP-SQL-NicName'))]"
+            }
+          ]
         }
       }
     }
