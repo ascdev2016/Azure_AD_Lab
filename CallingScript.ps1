@@ -42,7 +42,8 @@ $MyParams = @{
     newStorageAccountName = $saname
     location              = 'West Europe'
     domainName            = 'ascad.local'
-    addnsName             = $addnsName
+    dcdnsName             = $dcdnsName
+    sqldnsName            = $sqldnsname
    }
 
 # Splat the parameters on New-AzureRmResourceGroupDeployment  

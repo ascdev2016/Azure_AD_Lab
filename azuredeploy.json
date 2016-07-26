@@ -209,27 +209,32 @@
         "description": "The FQDN of the AD Domain created "
       }
     },
-    "addnsName": {
+    "dcdnsName": {
       "type": "string",
       "metadata": {
         "description": "The DNS prefix for the public IP address used by the Load Balancer"
+      },
+      "sqldnsName": {
+        "type": "string",
+        "metadata": {
+          "description": "The DNS prefix for the public IP address used by the Load Balancer"
+        }
+      },
+      "RDPPort": {
+        "type": "int",
+        "metadata": {
+          "description": "The public RDP port for the VM"
+        },
+        "defaultValue": 3389
+      },
+      "assetLocation": {
+        "type": "string",
+        "metadata": {
+          "description": "The location of resources such as templates and DSC modules that the script is dependent"
+        },
+        "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
       }
     },
-    "RDPPort": {
-      "type": "int",
-      "metadata": {
-        "description": "The public RDP port for the VM"
-      },
-      "defaultValue": 3389
-    },
-    "assetLocation": {
-      "type": "string",
-      "metadata": {
-        "description": "The location of resources such as templates and DSC modules that the script is dependent"
-      },
-      "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
-    }
-  },
   "variables": {
     "SP-DC-LBFE": "LBFE",
     "SP-SQL-LBFE": "LBFE",
