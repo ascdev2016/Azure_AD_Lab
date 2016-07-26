@@ -258,7 +258,8 @@
     "SP-SQL-RDPNATRuleID": "[concat(variables('SP-SQL-LBID'),'/inboundNatRules/',variables('RDPNAT'))]",
     "SP-DC-BEAddressPoolID": "[concat(variables('SP-DC-LBID'),'/backendAddressPools/',variables('SP-DC-LBBE'))]",
     "SP-SQL-BEAddressPoolID": "[concat(variables('SP-SQL-LBID'),'/backendAddressPools/',variables('SP-SQL-LBBE'))]",
-    "VM-DataDisk": "VMDataDisk",
+    "DC-DataDisk": "DCDataDisk",
+    "SQL-DataDisk": "SQLDataDisk",
     "VM-DataDiskSize": 5,
     "vnetTemplateUri": "[concat(parameters('assetLocation'),'vnet.json')]",
     "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'vnet-with-dns-server.json')]",
@@ -496,7 +497,7 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/', variables('VM-DataDisk'),'-1.vhd')]"
+                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/', variables('DC-DataDisk'),'-1.vhd')]"
               },
               "name": "[concat(parameters('SP-DC-VMName'),'-data-disk1')]",
               "caching": "None",
@@ -661,7 +662,7 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/', variables('VM-DataDisk'),'-1.vhd')]"
+                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/', variables('SQL-DataDisk'),'-1.vhd')]"
               },
               "name": "[concat(parameters('SP-SQL-VMName'),'-data-disk1')]",
               "caching": "None",
