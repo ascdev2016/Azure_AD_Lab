@@ -488,7 +488,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/','osdisk.vhd')]"
+              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/','dcosdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -653,7 +653,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/','osdisk.vhd')]"
+              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds/','sqlosdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
