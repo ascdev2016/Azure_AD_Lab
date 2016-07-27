@@ -630,7 +630,6 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "Microsoft.Resources/deployments/VNet",
         "[concat('Microsoft.Network/loadBalancers/',variables('SP-SQL-LBName'))]"
       ],
       "apiVersion": "2015-05-01-preview",
@@ -725,7 +724,7 @@
       "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]"
+        "[concat('Microsoft.Resources/deployments/UpdateSQLVNetDNS')]"
       ],
       "tags": {
         "displayName": "JoinDomain"
