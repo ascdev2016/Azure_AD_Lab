@@ -213,29 +213,29 @@
       "type": "string",
       "metadata": {
         "description": "The DNS prefix for the public IP address used by the Load Balancer"
-      }      
-     },
-      "sqldnsName": {
-        "type": "string",
-        "metadata": {
-          "description": "The DNS prefix for the public IP address used by the Load Balancer"
-        }
-      },
-      "RDPPort": {
-        "type": "int",
-        "metadata": {
-          "description": "The public RDP port for the VM"
-        },
-        "defaultValue": 3389
-      },
-      "assetLocation": {
-        "type": "string",
-        "metadata": {
-          "description": "The location of resources such as templates and DSC modules that the script is dependent"
-        },
-        "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
       }
     },
+    "sqldnsName": {
+      "type": "string",
+      "metadata": {
+        "description": "The DNS prefix for the public IP address used by the Load Balancer"
+      }
+    },
+    "RDPPort": {
+      "type": "int",
+      "metadata": {
+        "description": "The public RDP port for the VM"
+      },
+      "defaultValue": 3389
+    },
+    "assetLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "The location of resources such as templates and DSC modules that the script is dependent"
+      },
+      "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
+    }
+  },
   "variables": {
     "SP-DC-LBFE": "LBFE",
     "SP-SQL-LBFE": "LBFE",
@@ -265,7 +265,7 @@
     "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'vnet-with-dns-server.json')]",
     "adModulesURL": "[concat(parameters('assetLocation'),'CreateADDomainWithData.ps1.zip')]",
     "adConfigurationFunction": "CreateADDomainWithData.ps1\\CreateADDomainWithData",
-      "test": "test"
+    "test": "test"
   },
   "resources": [
     {
@@ -724,6 +724,7 @@
       "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines'),parameters('SP-SQL-VMName')]",
         "[concat('Microsoft.Resources/deployments/UpdateSQLVNetDNS')]"
       ],
       "tags": {
@@ -748,4 +749,5 @@
     }
   ]
 }
+
 
