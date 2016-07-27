@@ -724,7 +724,6 @@
       "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines', parameters('SP-SQL-VMName')]",
         "[concat('Microsoft.Resources/deployments/UpdateSQLVNetDNS')]"
       ],
       "tags": {
