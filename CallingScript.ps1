@@ -62,7 +62,7 @@ $SplatParams = @{
 New-AzureRmResourceGroupDeployment @SplatParams -Verbose
 
 # Find the VM IP and FQDN
-$PublicAddress = (Get-AzureRmPublicIpAddress -ResourceGroupName $rgname)[0]
+$PublicAddress = (Get-AzureRmPublicIpAddress -ResourceGroupName $rgname)[1]
 $IP   = $PublicAddress.IpAddress
 $FQDN = $PublicAddress.DnsSettings.Fqdn
 
