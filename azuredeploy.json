@@ -265,6 +265,7 @@
     "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'vnet-with-dns-server.json')]",
     "adModulesURL": "[concat(parameters('assetLocation'),'CreateADDomainWithData.ps1.zip')]",
     "adConfigurationFunction": "CreateADDomainWithData.ps1\\CreateADDomainWithData"
+      "test": "test"
   },
   "resources": [
     {
