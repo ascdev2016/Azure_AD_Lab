@@ -680,6 +680,33 @@
           ]
         }
       }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
+      ],
+      "tags": {
+        "displayName": "JoinDomain"
+      },
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "JsonADDomainExtension",
+        "typeHandlerVersion": "1.0",
+        "settings": {
+          "Name": "[parameters('domainName')]",
+          "OUPath": "",
+          "User": "[parameters('adminUsername')]",
+          "Restart": "true",
+          "Options": "3"
+        },
+        "protectedsettings": {
+          "Password": "[parameters('adminPassword')]"
+        }
+      }
     }
   ]
 }
