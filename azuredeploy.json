@@ -720,15 +720,11 @@
     },
     {
       "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
-      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/UpdateSQLVNetDNS')]"
       ],
-      "tags": {
-        "displayName": "JoinDomain"
-      },
+      "location": "[resourceGroup().location]",
+      "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "JsonADDomainExtension",
@@ -744,7 +740,11 @@
         "protectedsettings": {
           "Password": "[parameters('adminPassword')]"
         }
-      }
+      },
+      "tags": {
+        "displayName": "JoinDomain"
+      },
+      "type": "Microsoft.Compute/virtualMachines/extensions"
     }
   ]
 }
