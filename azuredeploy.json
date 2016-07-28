@@ -729,7 +729,7 @@
           {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('dnsLabelPrefix'),'/joindomain')]",
+            "name": "[concat(parameters('sqldnsname'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
               "[concat('Microsoft.Compute/virtualMachines/', parameters('sqldnsname'))]"
