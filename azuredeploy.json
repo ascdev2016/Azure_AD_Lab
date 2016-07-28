@@ -748,10 +748,10 @@
                 "User": "[concat(parameters('domainToJoin'), '\\', parameters('adminUsername'))]",
                 "Restart": "true",
                 "Options": "[parameters('domainJoinOptions')]"
+              },
+              "protectedSettings": {
+                "Password": "[parameters('adminPassword')]"
               }
-            },
-            "protectedSettings": {
-              "Password": "[parameters('adminPassword')]"
             }
           }
         ]
