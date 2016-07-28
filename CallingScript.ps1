@@ -30,6 +30,16 @@ $saname    = 'asclabsa'     # Lowercase required
 $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
 
+$string1 ='{
+	"Name": "ascad.local",
+	"User": "ascad\adadministrator",
+	"Restart": "true",
+	"Options": "3"
+		}'
+$string2 ='{"Password": "Herzblut$$16@dg"}'
+
+
+
 # Check that the public dns $addnsName is available
 if (Test-AzureRmDnsAvailability -DomainNameLabel $dcdnsName -Location $Location)
 { 'Available' } else { 'Taken. addnsName must be globally unique.' }
@@ -60,6 +70,11 @@ $SplatParams = @{
 # This takes ~30 minutes
 # One prompt for the domain admin password
 New-AzureRmResourceGroupDeployment @SplatParams -Verbose
+
+Set-AzureRmVMDscExtension -ResourceGroupName $rgname -ExtensionType .\1033"JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
+
+
+
 
 # Find the VM IP and FQDN
 $PublicAddress = (Get-AzureRmPublicIpAddress -ResourceGroupName $rgname)[1]
