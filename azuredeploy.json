@@ -745,7 +745,7 @@
               "settings": {
                 "Name": "[parameters('domainName')]",
                 "OUPath": "",
-                "User": "[concat(parameters('domainToJoin'), '\\', parameters('adminUsername'))]",
+                "User": "[concat(parameters('domainName'), '\\', parameters('adminUsername'))]",
                 "Restart": "true",
                 "Options": "[parameters('domainJoinOptions')]"
               },
