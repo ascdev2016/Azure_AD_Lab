@@ -29,15 +29,15 @@ $rgname    = 'ASC_Lab'
 $saname    = 'asclabsa'     # Lowercase required
 $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
-
+<#
 $string1 ='{
 	"Name": "ascad.local",
-	"User": "ascad\adadministrator",
+	"User": "adAdministrator",
 	"Restart": "true",
 	"Options": "3"
 		}'
 $string2 ='{"Password": "Herzblut$$16@dg"}'
-
+#>
 
 
 # Check that the public dns $addnsName is available
@@ -71,7 +71,7 @@ $SplatParams = @{
 # One prompt for the domain admin password
 New-AzureRmResourceGroupDeployment @SplatParams -Verbose
 
-Set-AzureRmVMDscExtension -ResourceGroupName $rgname -ExtensionType "JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
+#Set-AzureRmVMExtension -ResourceGroupName $rgname -ExtensionType "JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
 
 
 
