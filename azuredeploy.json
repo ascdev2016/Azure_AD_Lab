@@ -729,10 +729,10 @@
           {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('sqldnsname'),'/joindomain')]",
+            "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('sqldnsname'))]"
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
             ],
             "tags": {
               "displayName": "JoinDomainExtension"
