@@ -71,7 +71,7 @@ $SplatParams = @{
 # One prompt for the domain admin password
 New-AzureRmResourceGroupDeployment @SplatParams -Verbose
 
-Set-AzureRmVMDscExtension -ResourceGroupName $rgname -ExtensionType .\1033"JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
+Set-AzureRmVMDscExtension -ResourceGroupName $rgname -ExtensionType "JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
 
 
 
