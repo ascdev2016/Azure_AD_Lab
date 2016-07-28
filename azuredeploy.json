@@ -727,10 +727,10 @@
         },
         "resources": [
           {
-            "name": "[concat(parameters('sqldnsname'),'/joindomain')",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "location": "[parameters('location')]",
             "apiVersion": "[variables('apiVersion')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('dnsLabelPrefix'),'/joindomain')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
               "[concat('Microsoft.Compute/virtualMachines/', parameters('sqldnsname'))]"
             ],
@@ -749,7 +749,7 @@
                 "Restart": "true",
                 "Options": "[parameters('domainJoinOptions')]"
               },
-              "protectedSettings": {
+              "protectedsettings": {
                 "Password": "[parameters('adminPassword')]"
               }
             }
