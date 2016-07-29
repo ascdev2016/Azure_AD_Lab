@@ -305,7 +305,7 @@
     "SP-SP-LBName": "SP-SQL-LoadBalancer",
     "SP-DC-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-DC-LBName'))]",
     "SP-SQL-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-SQL-LBName'))]",
-    "SP-SP-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-SQL-LBName'))]",
+    "SP-SP-LBID": "[resourceId('Microsoft.Network/loadBalancers',variables('SP-SP-LBName'))]",
     "SP-DC-FEConfigID": "[concat(variables('SP-DC-LBID'),'/frontendIPConfigurations/',variables('SP-DC-LBFE'))]",
     "SP-SQL-FEConfigID": "[concat(variables('SP-SQL-LBID'),'/frontendIPConfigurations/',variables('SP-SQL-LBFE'))]",
     "SP-SP-FEConfigID": "[concat(variables('SP-SQL-LBID'),'/frontendIPConfigurations/',variables('SP-SP-LBFE'))]",
