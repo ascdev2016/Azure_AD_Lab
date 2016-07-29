@@ -940,8 +940,8 @@
           "location": "[resourceGroup().location]",
           "dependsOn": [
             "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SP-VMName'))]",
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]"
-
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]",
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'),'/extensions/joindomain')]"
           ],
           "properties": {
             "publisher": "Microsoft.Compute",
