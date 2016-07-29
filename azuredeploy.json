@@ -702,7 +702,9 @@
             "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/Microsoft.Powershell.DSC')]"
+
             ],
             "properties": {
               "publisher": "Microsoft.Compute",
