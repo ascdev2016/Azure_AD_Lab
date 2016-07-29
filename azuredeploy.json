@@ -703,7 +703,7 @@
             "location": "[resourceGroup().location]",
             "dependsOn": [
               "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/Microsoft.Powershell.DSC')]"
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]"
 
             ],
             "properties": {
