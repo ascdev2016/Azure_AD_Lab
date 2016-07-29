@@ -29,7 +29,7 @@ $rgname    = 'ASCLab'
 $saname    = 'asclabsa'     # Lowercase required
 $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
-$spdnsname = 'asclabsql'   # Lowercase required
+$spdnsname = 'asclabsp'   # Lowercase required
 <#
 $string1 ='{
 	"Name": "ascad.local",
@@ -61,6 +61,7 @@ $MyParams = @{
     domainName            = 'ascad.local'
     dcdnsName             = $dcdnsName
     sqldnsName            = $sqldnsname
+    spdnsName            = $spdnsname
    }
 
 # Splat the parameters on New-AzureRmResourceGroupDeployment  
