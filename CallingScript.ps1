@@ -25,7 +25,7 @@ Login-AzureRmAccount
 # something unique for you. Leave the last two characters in each.
 $URI       = 'https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/azuredeploy.json'
 $Location  = 'West Europe'
-$rgname    = 'ASC_Lab'
+$rgname    = 'ASCLab'
 $saname    = 'asclabsa'     # Lowercase required
 $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
