@@ -29,6 +29,7 @@ $rgname    = 'ASCLab'
 $saname    = 'asclabsa'     # Lowercase required
 $dcdnsName = 'asclabdc'     # Lowercase required
 $sqldnsname = 'asclabsql'   # Lowercase required
+$spdnsname = 'asclabsql'   # Lowercase required
 <#
 $string1 ='{
 	"Name": "ascad.local",
@@ -45,6 +46,9 @@ if (Test-AzureRmDnsAvailability -DomainNameLabel $dcdnsName -Location $Location)
 { 'Available' } else { 'Taken. addnsName must be globally unique.' }
 
 if (Test-AzureRmDnsAvailability -DomainNameLabel $sqldnsName -Location $Location)
+{ 'Available' } else { 'Taken. addnsName must be globally unique.' }
+
+if (Test-AzureRmDnsAvailability -DomainNameLabel $spdnsName -Location $Location)
 { 'Available' } else { 'Taken. addnsName must be globally unique.' }
 
 # Create the new resource group. Runs quickly.
