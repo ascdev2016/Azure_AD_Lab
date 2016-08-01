@@ -852,7 +852,7 @@
                   "autoUpgradeMinorVersion": true,
                 "settings": {
                   "modulesUrl": "variables('prepareDiskModulesURL')",
-                  "configurationFunction": "[variables('PrepareDiskFunction')]",
+                  "configurationFunction": "DataDisk",
                   "properties": {
                     "nodeName": "[parameters('SP-SQL-VMName')]"
                   }
