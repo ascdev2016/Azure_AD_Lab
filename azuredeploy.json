@@ -282,7 +282,19 @@
         "description": "The location of resources such as templates and DSC modules that the script is dependent"
       },
       "defaultValue": "https://raw.githubusercontent.com/ascdev2016/Azure_AD_Lab/master/"
-    }
+    },
+      "_artifactsLocation": {
+          "type": "string",
+          "metadata": {
+              "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+          }
+      },
+      "_artifactsLocationSasToken": {
+          "type": "securestring",
+          "metadata": {
+              "description": "Auto-generated token to access _artifactsLocation"
+          }
+      }
   },
   "variables": {
     "SP-DC-LBFE": "LBFE",
@@ -325,8 +337,8 @@
     "adConfigurationFunction": "CreateADDomainWithData.ps1\\CreateADDomainWithData",
     "prepareDiskModulesURL": "[concat(parameters('assetLocation'),'PrepareDisk.ps1.zip')]",
     "prepareDiskFunction": "preparedisks.ps1\\DataDisk",
-    "apiVersion": "2015-06-15"
-  },
+    "apiVersion": "2015-06-15",
+ },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
@@ -833,33 +845,33 @@
             }
           }
         },
-        {
-          "name": "PrepareDisk",
-          "type": "extensions",
-          "location": "[parameters('location')]",
-          "apiVersion": "2015-06-15",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'),'/extensions/joindomain')]"
-          ],
-          "tags": {
-            "displayName": "PrepareDisk"
-          },
-          "properties": {
-            "publisher": "Microsoft.Powershell",
-            "type": "DSC",
-            "typeHandlerVersion": "2.9",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "modulesUrl": "variables('prepareDiskModulesURL')",
-              "configurationFunction": "DataDisk",
+          {
+              "name": "PrepareDisks",
+              "type": "extensions",
+              "location": "[parameters('location')]",
+              "apiVersion": "2015-06-15",
+              "dependsOn": [
+                  "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
+              ],
+              "tags": {
+                  "displayName": "PrepareDisks"
+              },
               "properties": {
-                "nodeName": "[parameters('SP-SQL-VMName')]"
+                  "publisher": "Microsoft.Powershell",
+                  "type": "DSC",
+                  "typeHandlerVersion": "2.9",
+                  "autoUpgradeMinorVersion": true,
+                "settings": {
+                  "modulesUrl": "[concat(parameters('assetlocation'), '/', 'PrepareDisk.ps1.zip')]",
+                  "sasToken": "[parameters('_artifactsLocationSasToken')]",
+                  "configurationFunction": "[variables('prepareDiskFunction')]",
+                  "properties": {
+                    "nodeName": "[parameters('SP-SQL-VMName')]"
+                  }
+                },
+                  "protectedSettings": { }
               }
-            },
-            "protectedSettings": { }
           }
-        }
       ]
     },
     {
@@ -997,8 +1009,12 @@
     "PrepareDiskModulesUrl": {
       "type": "string",
       "value": "variables('prepareDiskModulesURL')"
+    },
+    "adModulesURL": {
+      "type": "string",
+      "value": "variables('adModulesURL')"
     }
   }
-  }
+}
 
 
