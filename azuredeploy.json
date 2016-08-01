@@ -991,7 +991,8 @@
         }
       ]
     }
-  ]
+  ],
+
   "outputs": {
     "PrepareDiskModulesUrl": {
       "type": "string",
