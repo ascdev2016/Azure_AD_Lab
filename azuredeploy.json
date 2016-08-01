@@ -323,6 +323,8 @@
     "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'vnet-with-dns-server.json')]",
     "adModulesURL": "[concat(parameters('assetLocation'),'CreateADDomainWithData.ps1.zip')]",
     "adConfigurationFunction": "CreateADDomainWithData.ps1\\CreateADDomainWithData",
+    "prepareDiskModulesURL": "[concat(parameters('assetLocation'),'PrepareDisk.ps1.zip')]",
+    "prepareDiskFunction": "preparedisks.ps1\\DataDisk",
     "apiVersion": "2015-06-15"
   },
   "resources": [
@@ -830,7 +832,34 @@
               "Password": "[parameters('adminPassword')]"
             }
           }
-        }
+        },
+          {
+              "name": "PrepareDisk",
+              "type": "extensions",
+              "location": "[parameters('location')]",
+              "apiVersion": "2015-06-15",
+            "dependsOn": [
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'),'/extensions/joindomain')]"
+            ],
+              "tags": {
+                  "displayName": "PrepareDisk"
+              },
+              "properties": {
+                  "publisher": "Microsoft.Powershell",
+                  "type": "DSC",
+                  "typeHandlerVersion": "2.9",
+                  "autoUpgradeMinorVersion": true,
+                "settings": {
+                  "modulesUrl": "variables('prepareDiskModulesURL')",
+                  "configurationFunction": "[variables('PrepareDiskFunction')]",
+                  "properties": {
+                    "nodeName": "[parameters('SP-SQL-VMName')]"
+                  }
+                },
+                  "protectedSettings": { }
+              }
+          }
       ]
     },
     {
