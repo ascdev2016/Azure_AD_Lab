@@ -833,33 +833,33 @@
             }
           }
         },
-          {
-              "name": "PrepareDisk",
-              "type": "extensions",
-              "location": "[parameters('location')]",
-              "apiVersion": "2015-06-15",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'),'/extensions/joindomain')]"
-            ],
-              "tags": {
-                  "displayName": "PrepareDisk"
-              },
+        {
+          "name": "PrepareDisk",
+          "type": "extensions",
+          "location": "[parameters('location')]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'),'/extensions/joindomain')]"
+          ],
+          "tags": {
+            "displayName": "PrepareDisk"
+          },
+          "properties": {
+            "publisher": "Microsoft.Powershell",
+            "type": "DSC",
+            "typeHandlerVersion": "2.9",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "modulesUrl": "variables('prepareDiskModulesURL')",
+              "configurationFunction": "DataDisk",
               "properties": {
-                  "publisher": "Microsoft.Powershell",
-                  "type": "DSC",
-                  "typeHandlerVersion": "2.9",
-                  "autoUpgradeMinorVersion": true,
-                "settings": {
-                  "modulesUrl": "variables('prepareDiskModulesURL')",
-                  "configurationFunction": "DataDisk",
-                  "properties": {
-                    "nodeName": "[parameters('SP-SQL-VMName')]"
-                  }
-                },
-                  "protectedSettings": { }
+                "nodeName": "[parameters('SP-SQL-VMName')]"
               }
+            },
+            "protectedSettings": { }
           }
+        }
       ]
     },
     {
@@ -992,6 +992,12 @@
       ]
     }
   ]
+  "outputs": {
+    "PrepareDiskModulesUrl": {
+      "type": "string",
+      "value": "variables('prepareDiskModulesURL')"
+    }
+  }
   }
 
 
