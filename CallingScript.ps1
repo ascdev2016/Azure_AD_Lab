@@ -78,7 +78,7 @@ New-AzureRmResourceGroupDeployment @SplatParams -Verbose
 
 #Set-AzureRmVMExtension -ResourceGroupName $rgname -ExtensionType "JsonADDomainExtension" -Name "joinDomain" -Publisher "Microsoft.Compute" -TypeHandlerVersion "1.3" -VMName "SP-SQL" -Location $Location -SettingString $string1 -ProtectedSettingString $string2
 
-
+Get-AzureRMVM -Name -ResourceGroupName
 
 
 # Find the VM IP and FQDN
