@@ -1,7 +1,7 @@
 ﻿Configuration DataDisk
     {
     Import-DSCResource -ModuleName xStorage
-    Node localhost
+    Node SP-SQL
     {
         xWaitforDisk Disk2
             {
