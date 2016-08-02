@@ -17,5 +17,3 @@
             }
     }
 }
-DataDisk -outputpath C:\DataDisk
-Start-DscConfiguration -Path C:\DataDisk -Wait -Force -Verbose
