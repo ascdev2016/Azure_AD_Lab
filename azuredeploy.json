@@ -812,9 +812,8 @@
           "name": "[concat(parameters('SP-SQL-VMName'),'/joindomain')]",
           "location": "[resourceGroup().location]",
           "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]"
-
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]",
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
           ],
           "properties": {
             "publisher": "Microsoft.Compute",
