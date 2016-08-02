@@ -859,11 +859,10 @@
               "properties": {
                   "publisher": "Microsoft.Powershell",
                   "type": "DSC",
-                  "typeHandlerVersion": "2.9",
+                  "typeHandlerVersion": "2.1",
                   "autoUpgradeMinorVersion": true,
                 "settings": {
                   "modulesUrl": "[concat(parameters('assetlocation'), '/', 'PrepareDisk.ps1.zip')]",
-                  "sasToken": "[parameters('_artifactsLocationSasToken')]",
                   "configurationFunction": "[variables('prepareDiskFunction')]",
                   "properties": {
                     "nodeName": "[parameters('SP-SQL-VMName')]"
