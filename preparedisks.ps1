@@ -1,7 +1,11 @@
 ﻿Configuration DataDisk
     {
+        param
+    ( 
+        [string]$NodeName ='localhost'
+    ) 
     Import-DSCResource -ModuleName xStorage
-    Node SP-SQL
+    Node "localhost"
     {
         xWaitforDisk Disk2
             {
