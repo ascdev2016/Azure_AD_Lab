@@ -837,9 +837,10 @@
               "type": "extensions",
               "location": "[parameters('location')]",
               "apiVersion": "2015-06-15",
-              "dependsOn": [
-                  "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]"
-              ],
+            "dependsOn": [
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-SQL-VMName'))]",
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('SP-DC-VMName'),'/extensions/CreateADForest')]"
+            ],
               "tags": {
                   "displayName": "PrepareDisks"
               },
