@@ -12,8 +12,8 @@
         xDisk FVolume
             {
             DiskNumber = 2
-            DriveLetter = ‘F’
-            FSLabel = ‘Data’
+            DriveLetter = 'F'
+            FSLabel = 'Data'
             }
     }
 }
