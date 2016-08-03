@@ -62,6 +62,7 @@ $MyParams = @{
     dcdnsName             = $dcdnsName
     sqldnsName            = $sqldnsname
     spdnsName            = $spdnsname
+	nodename = "SP-SQL"
    }
 
 # Splat the parameters on New-AzureRmResourceGroupDeployment  
