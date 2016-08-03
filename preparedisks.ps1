@@ -1,9 +1,5 @@
 ﻿Configuration DataDisk
     {
-        param
-    ( 
-        [string]$NodeName ='localhost'
-    ) 
     Import-DSCResource -ModuleName xStorage
     Node "localhost"
     {
