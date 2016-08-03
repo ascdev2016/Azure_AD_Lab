@@ -42,6 +42,9 @@
       },
       "defaultValue": "SPEnvironmentVNet"
     },
+
+      "defaultValue": "SPEnvironmentVNet"
+    },
     "virtualNetworkAddressRange": {
       "type": "string",
       "metadata": {
